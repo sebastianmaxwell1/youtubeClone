@@ -1,12 +1,29 @@
-const mongoose = require('mongoose');
+const User = require('../models/comments');
+const express = require('express');
+const router = express.Router();
 
-const commentSchema = new mongoose.Schema({
-    name: { type:String, required:true, minlength: 1, maxlength: 100 },
-    comment: { type:String, required: true },
-    dateModified: { type: Date, default:Date.now },
-    time: { type:TimeRanges, default:TimeRanges.now },
+//Endpoint & Route Handlers:
+
+
+router.post('/', async (req, res) => {
+    try {
+        const user= new User({
+            videoId: req.body.id,
+            text: req.body.text, 
+            likes: req.body.likes, 
+            dislikes: req.body.dislikes, 
+            replyComment: req.body.replyComment
+
+        });
+
+        await user.save();
+
+        return res.send(user);
+
+    } catch(ex) {
+        return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
 });
 
-const Comment = mongoose.model('Comment', commentSchema);
 
-module.exports = Comment;
+module.exports = router;
