@@ -1,4 +1,4 @@
-const User = require('../models/comments');
+const Comment = require('../models/comments');
 const express = require('express');
 const router = express.Router();
 
@@ -7,9 +7,9 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        const user= new User({
+        const comment= new Comment({
             videoId: req.body.id,
-            text: req.body.text, 
+            userComment: req.body.text, 
             likes: req.body.likes, 
             dislikes: req.body.dislikes, 
             replyComment: req.body.replyComment

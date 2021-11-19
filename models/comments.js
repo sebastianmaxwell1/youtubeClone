@@ -8,7 +8,7 @@ const replySchema = new mongoose.Schema({
 
 const commentsSchema = new mongoose.Schema({
     videoId: { type: String, required: true },
-    text: { type: String, required: true },
+    userComment: { type: String, required: true },
     likes: { type: Number, default: 0 },
     dislikes: { type: Number, default: 0 },
     replyComment: [{ type: replySchema }],
