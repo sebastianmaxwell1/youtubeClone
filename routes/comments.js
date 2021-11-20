@@ -14,6 +14,22 @@ router.get('/', async (req, res) => {
 });
 
 
+router.get('/:id', async (req, res) => {
+    try {
+   
+    const comment = await Comment.findById(req.params.id);
+    if (!comment)
+
+    return res.status(400).send(`The product with id "${req.params.id}" does not exist.`);
+
+    return res.send(comment);
+    
+    } catch (ex) {
+    return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+   });
+
+
 router.post('/', async (req, res) => {
     try {
         const { error } = validate(req.body);
