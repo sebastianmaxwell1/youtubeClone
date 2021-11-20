@@ -23,7 +23,7 @@ router.get('/:id', async (req, res) => {
     return res.status(400).send(`The product with id "${req.params.id}" does not exist.`);
 
     return res.send(comment);
-    
+
     } catch (ex) {
     return res.status(500).send(`Internal Server Error: ${ex}`);
     }
@@ -50,6 +50,35 @@ router.post('/', async (req, res) => {
         return res.send(comment);
 
     } catch(ex) {
+        return res.status(500).send(`Internal Server Error: ${ex}`);
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        const { error } = validate(req.body);
+        if (error) return res.status(400).send(error);
+
+        const comment = await Comment.findByIdAndUpdate(
+            req.params.id,
+            {
+                videoId: req.body.videoId,
+                userComment:req.body.userComment,
+                likes: req.body.likes,
+                dislikes: req.body.dislikes,
+                replyComment: req.body.replyComment,
+
+            },
+            {new: true}
+        );
+
+        if (!comment)
+        return res.status(400).send(`The Comment with Id "${req.params.id}" does not exist."`);
+
+        await comment.save();
+
+        return res.send(comment);
+    }   catch (ex) {
         return res.status(500).send(`Internal Server Error: ${ex}`);
     }
 });
