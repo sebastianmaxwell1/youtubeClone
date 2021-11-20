@@ -1,4 +1,4 @@
-const Comment = require('../models/comments');
+const { Comment, validate } = require('../models/comments');
 const express = require('express');
 const router = express.Router();
 
@@ -7,18 +7,22 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        const comment= new Comment({
-            videoId: req.body.id,
-            userComment: req.body.text, 
-            likes: req.body.likes, 
-            dislikes: req.body.dislikes, 
-            replyComment: req.body.replyComment
+        const { error } = validate(req.body);
+        if (error)
+        return res.status(400).send(error);
 
+        const comment = new Comment({
+            videoId: req.body.videoId,
+            userComment: req.body.userComment,
+            // likes: 0,
+            // dislikes: 0,
+            // replyComment: [],
         });
+ 
 
-        await user.save();
+        await comment.save();
 
-        return res.send(user);
+        return res.send(comment);
 
     } catch(ex) {
         return res.status(500).send(`Internal Server Error: ${ex}`);
