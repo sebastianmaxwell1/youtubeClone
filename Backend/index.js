@@ -2,6 +2,7 @@ const connectDB = require('./startup/db');
 const express = require('express');
 const app = express();
 const comment = require('./routes/comments');
+const user = require('./models/user')
 
 connectDB();
 
