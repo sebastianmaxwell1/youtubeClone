@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../styles/App.css';
 import Header from './Header';
 import SideBar from './SideBar';
 import RecommendedVideos from './ReccomendedVideos';
@@ -12,10 +12,11 @@ function App() {
     <div className="App">
       <Router>
         <Header />
+        <SideBar />
           <Routes>
-            <Route path='/' element={<Header/>}>
+            <Route path='/' >
               <div className="app_mainpage">
-                <SideBar />
+                {/* <SideBar /> */}
                 <RecommendedVideos />
               </div>
             </Route>
