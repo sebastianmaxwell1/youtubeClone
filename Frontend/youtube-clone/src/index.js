@@ -1,8 +1,8 @@
-import React from 'react';
+import React from  'react' ;
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import App from './components/App';
 
-const jsxElement = <h1> YouTube Clone</h1>;
-console.log(jsxElement);
 
-ReactDOM.render(jsxElement, document.getElementById('root'));
+ReactDOM.render(
+    <App />, document.getElementById('root')
+);
