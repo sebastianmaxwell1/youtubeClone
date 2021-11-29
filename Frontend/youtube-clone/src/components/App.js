@@ -13,14 +13,7 @@ function App() {
       <Router>
         <Header />
         <SideBar />
-          <Routes>
-            <Route path='/' >
-              <div className="app_mainpage">
-                {/* <SideBar /> */}
-                <RecommendedVideos />
-              </div>
-            </Route>
-          </Routes>
+        <RecommendedVideos />
       </Router>
     </div>
   )
